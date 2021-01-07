@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "--//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dcd.finance.mapper.DebtMapper">
+    <resultMap id="AccountResult" type="com.dcd.finance.bean.Debt">
+        <id property="actId" column="actId"/>
+        <result property="actName" column="actName"/>
+        <result property="actPass" column="actPass"/>
+        <result property="houseHolder" column="houseHolder"/>
+        <result property="surplus" column="surplus"/>
+    </resultMap>
+    <select id="selectDebt" resultType="map">
+        select debt.*,user.name,user.userId,account.actId,account.actName,account.surplus from debt inner join user on
+        debt.actId = user.actId and debt.userId = user.userId inner join account on debt.actId = account.actId
+        where 1=1
+        <if test="type!=null">
+            AND debt.type like '%${type}%'
+        </if>
+        <if test="debtName!=null">
+            AND debt.debtName LIKE '%${debtName}%'
+        </if>
+    </select>
+    <insert id="addDebt">
+        insert debt(actId,userId,type,debtName,debtMoney,debtTime) values
+        (#{actId},#{userId},#{type},#{debtName},#{debtMoney},#{debtTime})
+    </insert>
+    <update id="addSurplus">
+        update account set surplus = #{surplus} where actId = #{actId}
+    </update>
+    <delete id="deleteDebt">
+        delete from debt where debtId = #{debtId}
+    </delete>
+    <update id="updateDebt" parameterType="com.dcd.finance.bean.Debt">
+        UPDATE account set actName = #{actName}, actPass = #{actPass}, surplus = #{surplus}
+        WHERE actId = #{actId}
+    </update>
+    <select id="userDebt" resultType="map">
+        select * from debt where userId = #{userId} and actId = #{actId}
+    </select>
+</mapper>

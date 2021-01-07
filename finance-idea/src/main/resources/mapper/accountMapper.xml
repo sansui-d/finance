@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "--//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dcd.finance.mapper.AccountMapper">
+    <resultMap id="AccountResult" type="com.dcd.finance.bean.Account">
+        <id property="actId" column="actId"/>
+        <result property="actName" column="actName"/>
+        <result property="actPass" column="actPass"/>
+        <result property="houseHolder" column="houseHolder"/>
+        <result property="surplus" column="surplus"/>
+    </resultMap>
+    <select id="selectAccount" resultType="map">
+        select account.*,user.name,user.userId from account left join user on
+        account.houseHolder = user.userId
+        where 1=1
+        <if test="actName!=null">
+            AND account.actName like '%${actName}%'
+        </if>
+        <if test="name!=null">
+            AND user.name LIKE '%${name}%'
+        </if>
+    </select>
+    <select id="allUser" resultType="map">
+        select user.name,user.userId from user
+    </select>
+    <insert id="addAccount" parameterType="com.dcd.finance.bean.Account">
+        insert account(actName,actPass,houseHolder,surplus) values (#{account.actName},#{account.actPass},#{account.houseHolder},#{account.surplus})
+    </insert>
+    <delete id="deleteAccount" parameterType="java.lang.Integer">
+        delete from account where actId = #{actId}
+    </delete>
+    <update id="updateAccount" parameterType="com.dcd.finance.bean.Account">
+        UPDATE account set actName = #{actName}, actPass = #{actPass}, surplus = #{surplus}
+        WHERE actId = #{actId}
+    </update>
+    <select id="accountById" resultType="map" parameterType="java.lang.Integer">
+        select * from account where actId = #{actId};
+    </select>
+    <select id="accountByUser" resultType="map" parameterType="java.lang.Integer">
+        select * from user where actId = #{actId};
+    </select>
+    <insert id="accountCreate">
+        insert account(actName,actPass,houseHolder,surplus) values
+        (#{actName},#{actPass},#{houseHolder},#{surplus})
+    </insert>
+    <select id="seeAccount" resultType="map">
+        select account.* from account where actName = #{actName}
+        and actPass = #{actPass}
+    </select>
+    <update id="inActId">
+        update user set actId = #{actId} where userId = #{userId}
+    </update>
+    <select id="accountCome" resultType="map">
+        select * from account where actName = #{actName} and actPass = #{actPass}
+    </select>
+    <update id="upAct">
+        update account set actName = #{actName},actPass = #{actPass} where actId = #{actId}
+    </update>
+</mapper>

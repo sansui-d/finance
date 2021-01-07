@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "--//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dcd.finance.mapper.IncomeMapper">
+    <resultMap id="IncomeResult" type="com.dcd.finance.bean.Income">
+        <id property="inId" column="inId"/>
+        <result property="actId" column="actId"/>
+        <result property="userId" column="userId"/>
+        <result property="money" column="money"/>
+        <result property="type" column="type"/>
+        <result property="inTime" column="inTime"/>
+    </resultMap>
+    <select id="selectIncome" resultType="map">
+        select income.*,user.name,account.actName,account.surplus from income inner join user on
+        income.userId = user.userId inner join account on income.actId = account.actId
+        where 1=1
+        <if test="actName!=null">
+            AND account.actName like '%${actName}%'
+        </if>
+        <if test="name!=null">
+            AND user.name LIKE '%${name}%'
+        </if>
+    </select>
+    <select id="allAccount" resultType="map">
+        select account.actId,account.actName,account.surplus from account
+    </select>
+    <select id="nameByActId" resultType="map">
+        select user.userId,user.name from user where actId=#{actId}
+    </select>
+    <insert id="addIncome" parameterType="com.dcd.finance.bean.Income">
+        insert income(actId,userId,money,type,inTime) values (#{income.actId},#{income.userId},#{income.money},#{income.type},#{income.inTime})
+    </insert>
+    <update id="addUpdate" parameterType="com.dcd.finance.bean.Income">
+        UPDATE account set surplus = #{income.surplus}
+        WHERE actId = #{income.actId}
+    </update>
+    <delete id="deleteIncome" parameterType="java.lang.Integer">
+        delete from income where inId = #{inId}
+    </delete>
+    <update id="updateIncome" parameterType="com.dcd.finance.bean.Income">
+        UPDATE income set money = #{income.money}, type = #{income.type}
+        WHERE inId = #{income.inId}
+    </update>
+    <insert id="addCome">
+        insert income(actId,userId,money,type,inTime) values (#{actId},#{userId},#{money},#{type},#{inTime})
+    </insert>
+    <update id="upCome">
+        update account set surplus = #{surplus} where actId = #{actId}
+    </update>
+</mapper>

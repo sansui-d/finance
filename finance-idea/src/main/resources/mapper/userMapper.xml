@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "--//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dcd.finance.mapper.UserMapper">
+    <resultMap id="userResult" type="com.dcd.finance.bean.User">
+        <id property="userId" column="userId"/>
+        <result property="name" column="name"/>
+        <result property="sex" column="sex"/>
+        <result property="phone" column="phone"/>
+        <result property="loginId" column="loginId"/>
+        <result property="loginPass" column="loginPass"/>
+        <result property="time" column="time"/>
+        <result property="actId" column="actId"/>
+    </resultMap>
+    <select id="selectPage" resultMap="userResult" resultType="com.dcd.finance.bean.User">
+        select * from user
+    </select>
+    <insert id="insertUser" parameterType="com.dcd.finance.bean.User">
+        insert user (name,sex,loginId,loginPass,phone,time) values (#{user.name},#{user.sex},#{user.loginId},#{user.loginPass},#{user.phone},#{user.time})
+    </insert>
+    <select id="selectUser" resultType="com.dcd.finance.bean.User">
+        select * from user where 1=1
+        <if test="name!=null">
+            AND name like '%${name}%'
+        </if>
+        <if test="loginId!=null">
+            AND loginId LIKE '%${loginId}%'
+        </if>
+    </select>
+    <delete id="deleteUser" parameterType="java.lang.Integer">
+        delete from user where userId = #{userId}
+    </delete>
+    <update id="updateUser" parameterType="com.dcd.finance.bean.User">
+        UPDATE user set name = #{name}, loginId = #{loginId}, loginPass = #{loginPass}, sex = #{sex}, phone = #{phone}
+        WHERE userId = #{userId}
+    </update>
+    <select id="getUser" resultType="map">
+        select * from user where
+        userId = #{userId}
+    </select>
+    <select id="getAccount" resultType="map">
+        <if test="actId!=null">
+         select * from account where
+            actId = #{actId}
+        </if>
+    </select>
+    <select id="getIncome" resultType="map">
+        <if test="actId!=null">
+            select * from income where
+            actId = #{actId} and userId = #{userId}
+        </if>
+    </select>
+    <select id="getPay" resultType="map">
+        <if test="actId!=null">
+            select * from pay where
+            actId = #{actId} and userId = #{userId}
+        </if>
+    </select>
+    <update id="upUser">
+        UPDATE user set name = #{name}, loginId = #{loginId}, loginPass = #{loginPass}, sex = #{sex}, phone = #{phone}
+        WHERE userId = #{userId}
+    </update>
+    <insert id="register">
+        insert user (name,sex,loginId,loginPass,phone,time) values
+        (#{name},#{sex},#{loginId},#{loginPass},#{phone},#{time})
+    </insert>
+    <select id="allUser" resultType="map">
+        select * from user
+    </select>
+    <select id="allAccount" resultType="map">
+        select * from account
+    </select>
+    <select id="allIncome" resultType="map">
+        select * from income
+    </select>
+    <select id="allPay" resultType="map">
+        select * from pay
+    </select>
+</mapper>

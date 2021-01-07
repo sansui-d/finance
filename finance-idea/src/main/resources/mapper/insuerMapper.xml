@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "--//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dcd.finance.mapper.InsureMapper">
+    <resultMap id="IncomeResult" type="com.dcd.finance.bean.Insure">
+        <id property="sureId" column="sureId"/>
+        <result property="sureTitle" column="sureTitle"/>
+        <result property="sureContent" column="sureContent"/>
+        <result property="sureMoney" column="sureMoney"/>
+        <result property="sureTime" column="sureTime"/>
+        <result property="type" column="type"/>
+    </resultMap>
+    <select id="selectInsure" resultType="map">
+        select * from insure
+        where 1=1
+        <if test="sureTitle!=null">
+            AND insure.sureTitle like '%${sureTitle}%'
+        </if>
+    </select>
+    <insert id="addInsure" parameterType="com.dcd.finance.bean.Insure">
+        insert insure(sureTitle,sureContent,sureMoney,sureTime,type) values (#{insure.sureTitle},#{insure.sureContent},#{insure.sureMoney},#{insure.sureTime},#{insure.type})
+    </insert>
+    <delete id="deleteInsure" parameterType="java.lang.Integer">
+        delete from insure where sureId = #{sureId}
+    </delete>
+    <update id="updateInsure" parameterType="com.dcd.finance.bean.Insure">
+        UPDATE insure set sureTitle = #{insure.sureTitle}, sureContent = #{insure.sureContent},
+        sureMoney = #{insure.sureMoney},sureTime = #{insure.sureTime},type = #{insure.type}
+        WHERE sureId = #{insure.sureId}
+    </update>
+    <select id="allInsure" resultType="map">
+        select * from insure
+    </select>
+</mapper>

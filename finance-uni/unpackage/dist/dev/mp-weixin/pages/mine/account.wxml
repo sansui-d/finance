@@ -1,0 +1,1 @@
+<view><uni-nav-bar vue-id="f1c67d48-1" leftIcon="back" data-event-opts="{{[['^clickLeft',[['myback']]]]}}" bind:clickLeft="__e" bind:__l="__l"></uni-nav-bar></view>

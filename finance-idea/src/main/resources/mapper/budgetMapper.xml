@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "--//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dcd.finance.mapper.BudgetMapper">
+    <resultMap id="AccountResult" type="com.dcd.finance.bean.Budget">
+        <id property="bId" column="bId"/>
+        <result property="actId" column="actId"/>
+        <result property="userId" column="userId"/>
+        <result property="houseHolder" column="houseHolder"/>
+        <result property="surplus" column="surplus"/>
+    </resultMap>
+    <select id="selectBudget" resultType="map">
+        select * from budget where actId = #{actId} and userId = #{userId}
+    </select>
+    <insert id="addBudget">
+        insert budget(actId,userId,type,money,time) values
+        (#{actId},#{userId},#{type},#{money},#{time})
+    </insert>
+    <delete id="deleteBudget">
+        delete from budget where bId = #{bId}
+    </delete>
+    <select id="allBudget" resultType="map">
+        select budget.*,user.name,user.userId,account.actId,account.actName from budget inner join user on
+        budget.actId = user.actId and budget.userId = user.userId inner join account on budget.actId = account.actId
+        where 1=1
+        <if test="type!=null">
+            AND budget.type like '%${type}%'
+        </if>
+    </select>
+</mapper>

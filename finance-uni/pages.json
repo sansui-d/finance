@@ -1,0 +1,176 @@
+{
+	"pages": [{
+			"path": "pages/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false
+			}
+		}, {
+			"path": "pages/home",
+			"style": {
+				"navigationBarTitleText": "首页",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/mine/register",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/finance/finance",
+			"style": {
+				"navigationBarTitleText": "理财",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/analyse/analyse",
+			"style": {
+				"navigationBarTitleText": "分析",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/analyse/budget",
+			"style": {
+				"navigationBarTitleText": "预算",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/analyse/addBudget",
+			"style": {
+				"navigationBarTitleText": "添加预算",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/analyse/payDetail",
+			"style": {
+				"navigationBarTitleText": "支出详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/analyse/add",
+			"style": {
+				"navigationBarTitleText": "添加支出",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/analyse/accountDetail",
+			"style": {
+				"navigationBarTitleText": "账户详情",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/mine/mine",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/mine/myInsure",
+			"style": {
+				"navigationBarTitleText": "我的保险",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/mine/myLoan",
+			"style": {
+				"navigationBarTitleText": "我的贷款",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/mine/myDebt",
+			"style": {
+				"navigationBarTitleText": "我的债务",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/mine/myFamily",
+			"style": {
+				"navigationBarTitleText": "我的家人",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/mine/profile",
+			"style": {
+				"navigationBarTitleText": "个人资料",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/mine/account",
+			"style": {
+				"navigationBarTitleText": "绑定账户",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/mine/upAccount",
+			"style": {
+				"navigationBarTitleText": "账户管理",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/mine/pass",
+			"style": {
+				"navigationBarTitleText": "修改密码",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/mine/about",
+			"style": {
+				"navigationBarTitleText": "关于我们",
+				"enablePullDownRefresh": false
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationStyle": "custom"
+	},
+	"tabBar": {
+		"color": "#c6c7c7",
+		"selectedColor": "#728afc",
+		"borderStyle": "white",
+		"backgroundColor": "#ffffff",
+		"list": [{
+				"pagePath": "pages/home",
+				// "iconPath": "static/icons/tabbar/index.png",
+				// "selectedIconPath": "static/icons/tabbar/index_active.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/finance/finance",
+				// "iconPath": "static/icons/tabbar/hosp.png",
+				// "selectedIconPath": "static/icons/tabbar/zxkf_active.png",
+				"text": "理财"
+			},
+			{
+				"pagePath": "pages/analyse/analyse",
+				// "iconPath": "static/icons/tabbar/hosp.png",
+				// "selectedIconPath": "static/icons/tabbar/hosp_active.png",
+				"text": "分析"
+			},
+			{
+				"pagePath": "pages/mine/mine",
+				// "iconPath": "static/icons/tabbar/mine.png",
+				// "selectedIconPath": "static/icons/tabbar/mine_active.png",
+				"text": "我的"
+			}
+		]
+	}
+}

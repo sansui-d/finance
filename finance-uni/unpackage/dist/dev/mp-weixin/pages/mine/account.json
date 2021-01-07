@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "我的账户",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "uni-nav-bar": "/components/uni-nav-bar/uni-nav-bar"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "分析",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "mpvue-echarts": "/components/mpvue-echarts/src/echarts"
+  }
+}

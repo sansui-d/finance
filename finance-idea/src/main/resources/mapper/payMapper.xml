@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "--//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dcd.finance.mapper.PayMapper">
+    <resultMap id="PayResult" type="com.dcd.finance.bean.Pay">
+        <id property="payId" column="payId"/>
+        <result property="actId" column="actId"/>
+        <result property="userId" column="userId"/>
+        <result property="money" column="money"/>
+        <result property="type" column="type"/>
+        <result property="outTime" column="outTime"/>
+    </resultMap>
+    <select id="selectPay" resultType="map">
+        select pay.*,user.name,account.actName,account.surplus from pay inner join user on
+        pay.userId = user.userId inner join account on pay.actId = account.actId
+        where 1=1
+        <if test="actName!=null">
+            AND account.actName like '%${actName}%'
+        </if>
+        <if test="name!=null">
+            AND user.name LIKE '%${name}%'
+        </if>
+    </select>
+    <insert id="addPay" parameterType="com.dcd.finance.bean.Pay">
+        insert pay(actId,userId,money,type,outTime) values (#{pay.actId},#{pay.userId},#{pay.money},#{pay.type},#{pay.outTime})
+    </insert>
+    <update id="addUpdate" parameterType="com.dcd.finance.bean.Pay">
+        UPDATE account set surplus = #{pay.surplus}
+        WHERE actId = #{pay.actId}
+    </update>
+    <delete id="deletePay" parameterType="java.lang.Integer">
+        delete from pay where payId = #{payId}
+    </delete>
+    <update id="updatePay" parameterType="com.dcd.finance.bean.Pay">
+        UPDATE pay set money = #{pay.money}, type = #{pay.type}
+        WHERE payId = #{pay.payId}
+    </update>
+    <insert id="userPay">
+        insert pay(actId,userId,money,type,outTime) values (#{actId},#{userId},#{money},#{type},#{outTime})
+    </insert>
+    <update id="actPay">
+        update account set surplus = #{surplus} where actId = #{actId}
+    </update>
+</mapper>

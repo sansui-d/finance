@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "--//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dcd.finance.mapper.LoanMapper">
+    <resultMap id="IncomeResult" type="com.dcd.finance.bean.Loan">
+        <id property="loanId" column="loanId"/>
+        <result property="loanName" column="loanName"/>
+        <result property="loanContent" column="loanContent"/>
+        <result property="loanMoney" column="loanMoney"/>
+        <result property="type" column="type"/>
+        <result property="loanTime" column="loanTime"/>
+    </resultMap>
+    <select id="selectLoan" resultType="map">
+        select * from loan
+        where 1=1
+        <if test="loanName!=null">
+            AND loan.loanName like '%${loanName}%'
+        </if>
+    </select>
+    <insert id="addLoan" parameterType="com.dcd.finance.bean.Loan">
+        insert loan(loanName,loanContent,loanMoney,type,loanTime) values (#{loan.loanName},#{loan.loanContent},#{loan.loanMoney},#{loan.type},#{loan.loanTime})
+    </insert>
+    <delete id="deleteLoan" parameterType="java.lang.Integer">
+        delete from loan where loanId = #{loanId}
+    </delete>
+    <update id="updateLoan" parameterType="com.dcd.finance.bean.Loan">
+        UPDATE loan set loanName = #{loan.loanName}, loanContent = #{loan.loanContent},
+        loanMoney = #{loan.loanMoney},type = #{loan.type},loanTime = #{loan.loanTime}
+        WHERE loanId = #{loan.loanId}
+    </update>
+    <select id="allLoan" resultType="map">
+        select * from loan
+    </select>
+</mapper>
